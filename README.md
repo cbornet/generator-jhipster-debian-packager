@@ -48,13 +48,13 @@ The executable war will be installed and started as a linux service. To start it
 ```bash
 sudo service <appname> start
 ```
-By default, the application is started with the ```prod``` profile. This can be changed in the /etc/default/<appname> configuration file.
+By default, the application is started with the ```prod``` profile. This can be changed in the /etc/default/< appname > configuration file.
 
 The package installs the following files:
-* /usr/share/<appname>/lib/<appname>-<version>.war: your JHipster application as executable war symlinked to /usr/share/<appname>/bin/<appname>
-* /etc/default/<appname>: the launch script configuration file (see Spring Boot [doc](https://docs.spring.io/spring-boot/docs/current/reference/html/deployment-install.html#deployment-script-customization-conf-file). The .conf file is symlinked to this file)
-* /etc/<appname>/: the directory for the configuration files (application.yml, ...)
-* /var/log/<appname>/ : the directory for the application logs
+* /usr/share/< appname >/lib/< appname >-< version >.war: your JHipster application as executable war symlinked to /usr/share/< appname >/bin/< appname >
+* /etc/default/< appname >: the launch script configuration file (see Spring Boot [doc](https://docs.spring.io/spring-boot/docs/current/reference/html/deployment-install.html#deployment-script-customization-conf-file). The .conf file is symlinked to this file)
+* /etc/< appname >/: the directory for the configuration files (application.yml, ...)
+* /var/log/< appname >/ : the directory for the application logs
 
 # License
 
