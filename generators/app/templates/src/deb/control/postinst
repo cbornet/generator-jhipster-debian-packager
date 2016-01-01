@@ -1,0 +1,3 @@
+update-rc.d [[artifactId]] defaults
+service [[artifactId]] start || echo "[[artifactId]] could not be started. Try manually with service [[artifactId]] start"
+

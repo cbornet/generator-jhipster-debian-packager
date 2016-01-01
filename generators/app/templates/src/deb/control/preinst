@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# Adding [[artifactId]] as system group
+if ! getent group [[artifactId]] > /dev/null 2>&1
+then
+    echo "Creating system group: [[artifactId]]"
+	addgroup --system [[artifactId]]
+fi
+
+# Adding [[artifactId]]
+if ! id -u [[artifactId]] > /dev/null 2>&1; then
+    echo "Creating user [[artifactId]] in group [[artifactId]]"
+    useradd --system --no-create-home --gid [[artifactId]] [[artifactId]] --shell /bin/bash
+fi

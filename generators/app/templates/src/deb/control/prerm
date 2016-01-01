@@ -1,0 +1,2 @@
+#!/bin/sh
+service [[artifactId]] stop || echo "[[artifactId]] wasn't even running!"

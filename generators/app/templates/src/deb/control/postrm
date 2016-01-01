@@ -1,0 +1,17 @@
+#!/bin/sh
+update-rc.d -f [[artifactId]] remove
+# Deleting user: [[artifactId]] and group: [[artifactId]]
+case "$1" in
+   remove|failed-upgrade|abort-upgrade|abort-install|disappear)
+   ;;
+   purge)
+        deluser --quiet --system [[artifactId]] > /dev/null || true
+        delgroup --quiet --system [[artifactId]] > /dev/null || true
+   ;;
+   upgrade)
+   ;;
+   *)
+      echo "postinst called with unknown argument \`\$1'" >&2
+   ;;
+esac
+
