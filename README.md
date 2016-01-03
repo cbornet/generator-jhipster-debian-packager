@@ -32,7 +32,8 @@ In your JHipster project directory run:
 ```bash
 yo jhipster-debian-packager
 ```
-This will add a jdeb goal to the pom.xml and support files that will create a .deb archive in the target directory when ```mvn package``` is called
+This will add a jdeb goal to the pom.xml and support files that will create a .deb archive in the target directory when ```mvn package``` is called.
+Use the option ```--force``` if you don't want questions to be asked.
 
 NOTE: with the current version of JHipster (2.26.2) some modifications must be done manually in the pom.xml:
 * set the war as executable for the prod profile with ```<executable>true</executable>```
@@ -51,10 +52,10 @@ sudo service <appname> start
 By default, the application is started with the ```prod``` profile. This can be changed in the /etc/default/< appname > configuration file.
 
 The package installs the following files:
-* /usr/share/< appname >/lib/< appname >-< version >.war: your JHipster application as executable war symlinked to /usr/share/< appname >/bin/< appname >
-* /etc/default/< appname >: the launch script configuration file (see Spring Boot [doc](https://docs.spring.io/spring-boot/docs/current/reference/html/deployment-install.html#deployment-script-customization-conf-file). The .conf file is symlinked to this file)
-* /etc/< appname >/: the directory for the configuration files (application.yml, ...)
-* /var/log/< appname >/ : the directory for the application logs
+* ```/usr/share/< appname >/lib/<appname>-<version>.war```: your JHipster application as executable war symlinked to ```/usr/share/<appname>/bin/<appname>```
+* ```/etc/default/<appname>```: the launch script configuration file (see Spring Boot [doc](https://docs.spring.io/spring-boot/docs/current/reference/html/deployment-install.html#deployment-script-customization-conf-file). The .conf file is symlinked to this file)
+* ```/etc/<appname>/```: the directory for the configuration files (application.yml, ...)
+* ```/var/log/<appname>/``` : the directory for the application logs
 
 # License
 
@@ -66,4 +67,3 @@ Apache-2.0 © [Christophe Bornet]
 [travis-url]: https://travis-ci.org/cbornet/generator-jhipster-debian-packager
 [daviddm-image]: https://david-dm.org/cbornet/generator-jhipster-debian-packager.svg?theme=shields.io
 [daviddm-url]: https://david-dm.org/cbornet/generator-jhipster-module
-
