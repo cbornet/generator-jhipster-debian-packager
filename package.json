@@ -1,28 +1,28 @@
 {
-    "name": "generator-jhipster-debian-packager",
-    "version": "0.1.1",
-    "description": "Packages a JHipster application into a debian/ubuntu .deb package",
-    "keywords": [
-        "yeoman-generator",
-        "jhipster-module"
-    ],
-    "homepage": "https://github.com/cbornet/generator-jhipster-debian-packager",
-    "bugs": "https://github.com/cbornet/generator-jhipster-debian-packager/issues",
-    "author": {
-        "name": "Christophe Bornet",
-        "email": "",
-        "url": ""
-    },
-    "files": [
-        "generators"
-    ],
-    "main": "generators/app/index.js",
-    "repository": "https://github.com/cbornet/generator-jhipster-debian-packager",
-    "dependencies": {
-        "yeoman-generator": "0.21.1",
-        "chalk": "1.0.0",
-        "yosay": "1.0.2",
-        "generator-jhipster": ">=2.26.0"
-    },
-    "license": "Apache-2.0"
+  "name": "generator-jhipster-debian-packager",
+  "version": "0.2.0",
+  "description": "Packages a JHipster application into a debian/ubuntu .deb package",
+  "keywords": [
+    "yeoman-generator",
+    "jhipster-module"
+  ],
+  "homepage": "https://github.com/cbornet/generator-jhipster-debian-packager",
+  "bugs": "https://github.com/cbornet/generator-jhipster-debian-packager/issues",
+  "author": {
+    "name": "Christophe Bornet",
+    "email": "",
+    "url": ""
+  },
+  "files": [
+    "generators"
+  ],
+  "main": "generators/app/index.js",
+  "repository": "https://github.com/cbornet/generator-jhipster-debian-packager",
+  "dependencies": {
+    "yeoman-generator": "0.21.1",
+    "chalk": "1.0.0",
+    "yosay": "1.0.2",
+    "generator-jhipster": ">=2.26.0"
+  },
+  "license": "Apache-2.0"
 }
