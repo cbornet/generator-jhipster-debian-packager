@@ -5,7 +5,7 @@
 # Introduction
 
 This is a [JHipster](http://jhipster.github.io/) module, that is meant to be used in a JHipster application.
-The module uses the jdeb library to repackage the war and configuration files into a .deb archive
+The module uses the [jdeb](https://github.com/tcurdt/jdeb) library to repackage the war and configuration files into a .deb archive
 
 # Prerequisites
 
