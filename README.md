@@ -36,8 +36,8 @@ This will add a jdeb goal to the pom.xml and support files that will create a .d
 Use the option ```--force``` if you don't want questions to be asked.
 
 NOTE: with the current version of JHipster (2.26.2) some modifications must be done manually in the pom.xml:
-* set the war as executable for the prod profile with ```<executable>true</executable>```
 * downgrade Spring Boot version to 1.3.0.RELEASE (because of issue https://github.com/spring-projects/spring-boot/issues/4866)
+* with JHipster version <= 2.26.2, set the war as executable for the prod profile with ```<executable>true</executable>```
 
 You can then use the command
 ```bash

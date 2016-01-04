@@ -46,8 +46,7 @@ module.exports = yeoman.generators.Base.extend({
       }]
 
       this.prompt(prompts, function (props) {
-        this.props = props;
-        if(this.props.continue.toUpperCase() !== 'Y') {
+        if(props.continue.toUpperCase() !== 'Y') {
           process.exit(1);
         }
         done();
@@ -75,10 +74,6 @@ module.exports = yeoman.generators.Base.extend({
     this.copy(debControlDir + "/preinst", debControlDir + "/preinst");
     this.copy(debControlDir + "/postinst", debControlDir + "/postinst");
     this.copy(debControlDir + "/postrm", debControlDir + "/postrm");
-
-    /*var conf = "<executable>true\n" +
-    "                            </executable>";
-    jhipsterFunc.addConfigurationToProdSBMavenPlugin(conf);*/
 
     var other = "                <executions>\n" +
     "                    <execution>\n" +
