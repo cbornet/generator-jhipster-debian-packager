@@ -1,5 +1,5 @@
 # generator-jhipster-debian-packager
-
+[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
 > JHipster module, packages a JHipster application into a debian/ubuntu .deb package
 
 # Introduction
@@ -37,7 +37,7 @@ Options :
 * ```--force``` if you don't want questions to be asked.
 * ```--clean``` to uninstall the module instead of installing.
 
-NOTE: with the current version of JHipster (2.26.2) some modifications must be done manually in the pom.xml:
+NOTE: with the current version of JHipster, some modifications must be done manually in the pom.xml:
 * downgrade Spring Boot version to 1.3.0.RELEASE (because of issue https://github.com/spring-projects/spring-boot/issues/4866)
 * with JHipster version <= 2.26.2, set the war as executable for the prod profile with ```<executable>true</executable>```
 
