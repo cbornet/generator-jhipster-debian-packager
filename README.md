@@ -33,7 +33,9 @@ In your JHipster project directory run:
 yo jhipster-debian-packager
 ```
 This will add a jdeb goal to the pom.xml and support files that will create a .deb archive in the target directory when ```mvn package``` is called.
-Use the option ```--force``` if you don't want questions to be asked.
+Options :
+* ```--force``` if you don't want questions to be asked.
+* ```--clean``` to uninstall the module instead of installing.
 
 NOTE: with the current version of JHipster (2.26.2) some modifications must be done manually in the pom.xml:
 * downgrade Spring Boot version to 1.3.0.RELEASE (because of issue https://github.com/spring-projects/spring-boot/issues/4866)

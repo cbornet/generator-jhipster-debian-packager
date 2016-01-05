@@ -4,12 +4,38 @@ var chalk = require('chalk');
 var yosay = require('yosay');
 var packagejs = require(__dirname + '/../../package.json');
 var _ = require('underscore.string');
+var shelljs = require('shelljs');
+var fs = require('fs');
+var path = require('path');
 
 // Stores JHipster variables
 var jhipsterVar = {moduleName: 'debian-packager'};
 
 // Stores JHipster functions
 var jhipsterFunc = {};
+
+function removefile(file) {
+  console.log('Remove the file - ' + file)
+  if (shelljs.test('-f', file)) {
+    shelljs.rm(file);
+  }
+}
+
+function removefolder(folder) {
+  console.log('Remove the folder - ' + folder)
+  if (shelljs.test('-d', folder)) {
+    shelljs.rm("-rf", folder);
+  }
+}
+
+//Remove when jhipster > 2.26.2 is out
+function replaceContent (filePath, pattern, content) {
+  console.log("modifying " + filePath);
+  var fullPath = path.join(process.cwd(), filePath);
+  var body = fs.readFileSync(fullPath, 'utf8');
+  body = body.replace(pattern, content);
+  fs.writeFileSync(fullPath, body);
+}
 
 module.exports = yeoman.generators.Base.extend({
 
@@ -59,21 +85,8 @@ module.exports = yeoman.generators.Base.extend({
   writing: function () {
     var done = this.async();
 
-    this.baseName = jhipsterVar.baseName;
-    this.packageName = jhipsterVar.packageName;
-    this.angularAppName = jhipsterVar.angularAppName;
-    this.slugifiedBaseName = _.slugify(this.baseName);
-    var javaDir = jhipsterVar.javaDir;
-    var resourceDir = jhipsterVar.resourceDir;
-    var webappDir = jhipsterVar.webappDir;
+    this.slugifiedBaseName = _.slugify(jhipsterVar.baseName);
     var debControlDir = "src/deb/control";
-
-    this.copy("src/deb/etc/default/linux-service", "src/deb/etc/default/" + this.slugifiedBaseName, this, {});
-    this.copy(debControlDir + "/control", debControlDir + "/control");
-    this.copy(debControlDir + "/prerm", debControlDir + "/prerm");
-    this.copy(debControlDir + "/preinst", debControlDir + "/preinst");
-    this.copy(debControlDir + "/postinst", debControlDir + "/postinst");
-    this.copy(debControlDir + "/postrm", debControlDir + "/postrm");
 
     var other = "                <executions>\n" +
     "                    <execution>\n" +
@@ -158,7 +171,26 @@ module.exports = yeoman.generators.Base.extend({
     "                    </execution>\n" +
     "                </executions>";
 
-    jhipsterFunc.addMavenPlugin("org.vafer", "jdeb", "1.4", other);
+    if( this.options.clean === true) {
+      removefolder("src/deb");
+      var plugin =  '            <plugin>\n' +
+      '                <groupId>org.vafer</groupId>\n' +
+      '                <artifactId>jdeb</artifactId>\n' +
+      '                <version>1.4</version>\n' +
+      other + '\n' +
+      '            </plugin>\n';
+      replaceContent('pom.xml', plugin, '');
+
+    } else {
+      this.copy("src/deb/etc/default/linux-service", "src/deb/etc/default/" + this.slugifiedBaseName, this, {});
+      this.copy(debControlDir + "/control", debControlDir + "/control");
+      this.copy(debControlDir + "/prerm", debControlDir + "/prerm");
+      this.copy(debControlDir + "/preinst", debControlDir + "/preinst");
+      this.copy(debControlDir + "/postinst", debControlDir + "/postinst");
+      this.copy(debControlDir + "/postrm", debControlDir + "/postrm");
+
+      jhipsterFunc.addMavenPlugin("org.vafer", "jdeb", "1.4", other);
+    }
     done();
   }
 
