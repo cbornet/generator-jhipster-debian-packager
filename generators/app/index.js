@@ -14,29 +14,6 @@ var jhipsterVar = {moduleName: 'debian-packager'};
 // Stores JHipster functions
 var jhipsterFunc = {};
 
-function removefile(file) {
-  console.log('Remove the file - ' + file)
-  if (shelljs.test('-f', file)) {
-    shelljs.rm(file);
-  }
-}
-
-function removefolder(folder) {
-  console.log('Remove the folder - ' + folder)
-  if (shelljs.test('-d', folder)) {
-    shelljs.rm("-rf", folder);
-  }
-}
-
-//Remove when jhipster > 2.26.2 is out
-function replaceContent (filePath, pattern, content) {
-  console.log("modifying " + filePath);
-  var fullPath = path.join(process.cwd(), filePath);
-  var body = fs.readFileSync(fullPath, 'utf8');
-  body = body.replace(pattern, content);
-  fs.writeFileSync(fullPath, body);
-}
-
 module.exports = yeoman.generators.Base.extend({
 
   initializing: {
@@ -65,14 +42,14 @@ module.exports = yeoman.generators.Base.extend({
     }
     if(this.options.force !== true) {
       var prompts = [{
-        type: 'input',
+        type: 'confirm',
         name: 'continue',
-        message: 'Your project files will be modified. Are you sure you want to continue ? (y/N)',
-        default: 'N'
+        message: 'Your project files will be modified. Are you sure you want to continue ?',
+        default: false
       }]
 
       this.prompt(prompts, function (props) {
-        if(props.continue.toUpperCase() !== 'Y') {
+        if(!props.continue) {
           process.exit(1);
         }
         done();
@@ -140,11 +117,11 @@ module.exports = yeoman.generators.Base.extend({
     "                                    <type>files</type>\n" +
     "                                    <conffile>true</conffile>\n" +
     "                                    <paths>\n" +
-    "                                        <path>${basedir}/src/main/resources/config/application-dev.yml</path>\n" +
-    "                                        <path>${basedir}/src/main/resources/config/application-prod.yml</path>\n" +
-    "                                        <path>${basedir}/src/main/resources/config/application.yml</path>\n" +
-    "                                        <path>${basedir}/src/main/resources/logback-spring.xml</path>\n" +
-    "                                        <path>${basedir}/src/main/resources/ehcache.xml</path>\n" +
+    "                                        <path>${project.build.outputDirectory}/src/main/resources/config/application-dev.yml</path>\n" +
+    "                                        <path>${project.build.outputDirectory}/src/main/resources/config/application-prod.yml</path>\n" +
+    "                                        <path>${project.build.outputDirectory}/src/main/resources/config/application.yml</path>\n" +
+    "                                        <path>${project.build.outputDirectory}/src/main/resources/logback-spring.xml</path>\n" +
+    "                                        <path>${project.build.outputDirectory}/src/main/resources/ehcache.xml</path>\n" +
     "                                    </paths>\n" +
     "                                    <dst>/etc/${project.artifactId}</dst>\n" +
     "                                    <mapper>\n" +
@@ -171,18 +148,24 @@ module.exports = yeoman.generators.Base.extend({
     "                    </execution>\n" +
     "                </executions>";
 
+    var replaceContent = function (filePath, pattern, content, _this) {
+      var body = _this.fs.read(filePath);
+      body = body.replace(pattern, content);
+      _this.fs.write(filePath, body);
+    }
+
     if( this.options.clean === true) {
-      removefolder("src/deb");
+      this.fs.delete("src/deb/");
       var plugin =  '            <plugin>\n' +
       '                <groupId>org.vafer</groupId>\n' +
       '                <artifactId>jdeb</artifactId>\n' +
       '                <version>1.4</version>\n' +
       other + '\n' +
       '            </plugin>\n';
-      replaceContent('pom.xml', plugin, '');
+      replaceContent('pom.xml', plugin, '', this);
 
     } else {
-      this.copy("src/deb/etc/default/linux-service", "src/deb/etc/default/" + this.slugifiedBaseName, this, {});
+      this.copy("src/deb/etc/default/linux-service", "src/deb/etc/default/" + this.slugifiedBaseName);
       this.copy(debControlDir + "/control", debControlDir + "/control");
       this.copy(debControlDir + "/prerm", debControlDir + "/prerm");
       this.copy(debControlDir + "/preinst", debControlDir + "/preinst");
