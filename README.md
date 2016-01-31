@@ -38,7 +38,7 @@ Options :
 * ```--clean``` to uninstall the module instead of installing.
 
 NOTE: with the current version of JHipster, some modifications must be done manually in the pom.xml:
-* downgrade Spring Boot version to 1.3.0.RELEASE (because of issue https://github.com/spring-projects/spring-boot/issues/4866)
+* upgrade Spring Boot version to 1.3.2.RELEASE (because of issue https://github.com/spring-projects/spring-boot/issues/4866)
 * with JHipster version <= 2.26.2, set the war as executable for the prod profile with ```<executable>true</executable>```
 
 You can then use the command
