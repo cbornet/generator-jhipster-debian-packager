@@ -1,6 +1,6 @@
 {
   "name": "generator-jhipster-debian-packager",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Packages a JHipster application into a debian/ubuntu .deb package",
   "keywords": [
     "yeoman-generator",
