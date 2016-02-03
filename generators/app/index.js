@@ -117,11 +117,11 @@ module.exports = yeoman.generators.Base.extend({
     "                                    <type>files</type>\n" +
     "                                    <conffile>true</conffile>\n" +
     "                                    <paths>\n" +
-    "                                        <path>${project.build.outputDirectory}/src/main/resources/config/application-dev.yml</path>\n" +
-    "                                        <path>${project.build.outputDirectory}/src/main/resources/config/application-prod.yml</path>\n" +
-    "                                        <path>${project.build.outputDirectory}/src/main/resources/config/application.yml</path>\n" +
-    "                                        <path>${project.build.outputDirectory}/src/main/resources/logback-spring.xml</path>\n" +
-    "                                        <path>${project.build.outputDirectory}/src/main/resources/ehcache.xml</path>\n" +
+    "                                        <path>${project.build.outputDirectory}/config/application-dev.yml</path>\n" +
+    "                                        <path>${project.build.outputDirectory}/config/application-prod.yml</path>\n" +
+    "                                        <path>${project.build.outputDirectory}/config/application.yml</path>\n" +
+    "                                        <path>${project.build.outputDirectory}/logback-spring.xml</path>\n" +
+    "                                        <path>${project.build.outputDirectory}/ehcache.xml</path>\n" +
     "                                    </paths>\n" +
     "                                    <dst>/etc/${project.artifactId}</dst>\n" +
     "                                    <mapper>\n" +
